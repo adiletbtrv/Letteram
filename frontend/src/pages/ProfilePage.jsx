@@ -11,9 +11,7 @@ const ProfilePage = () => {
     if (!file) return;
 
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
-
     reader.onload = async () => {
       const base64Image = reader.result;
       setSelectedImg(base64Image);
@@ -22,22 +20,23 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="h-screen pt-20">
-      <div className="max-w-2xl mx-auto p-4 py-8">
+    <div className="min-h-screen pt-20 bg-base-100">
+      <div className="max-w-3xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="bg-base-300 rounded-xl p-6 space-y-8">
+
+          {/* Header */}
           <div className="text-center">
-            <h1 className="text-2xl font-semibold ">Profile</h1>
-            <p className="mt-2">Your profile information</p>
+            <h1 className="text-2xl sm:text-3xl font-semibold">Profile</h1>
+            <p className="mt-2 text-sm sm:text-base">Your profile information</p>
           </div>
 
-          {/* avatar upload section */}
-
+          {/* Avatar Upload Section */}
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <img
                 src={selectedImg || authUser.profilePic || "/avatar.png"}
                 alt="Profile"
-                className="size-32 rounded-full object-cover border-4 "
+                className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4"
               />
               <label
                 htmlFor="avatar-upload"
@@ -60,18 +59,19 @@ const ProfilePage = () => {
                 />
               </label>
             </div>
-            <p className="text-sm text-zinc-400">
+            <p className="text-xs sm:text-sm text-zinc-400 text-center">
               {isUpdatingProfile ? "Uploading..." : "Click the camera icon to update your photo"}
             </p>
           </div>
 
+          {/* User Info */}
           <div className="space-y-6">
             <div className="space-y-1.5">
               <div className="text-sm text-zinc-400 flex items-center gap-2">
                 <User className="w-4 h-4" />
                 Full Name
               </div>
-              <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.fullName}</p>
+              <p className="px-4 py-2.5 bg-base-200 rounded-lg border break-words">{authUser?.fullName}</p>
             </div>
 
             <div className="space-y-1.5">
@@ -79,26 +79,29 @@ const ProfilePage = () => {
                 <Mail className="w-4 h-4" />
                 Email Address
               </div>
-              <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.email}</p>
+              <p className="px-4 py-2.5 bg-base-200 rounded-lg border break-words">{authUser?.email}</p>
             </div>
           </div>
 
+          {/* Account Info */}
           <div className="mt-6 bg-base-200 rounded-xl p-6">
-            <h2 className="text-lg font-medium  mb-4">Account Information</h2>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center justify-between py-2 border-b border-zinc-700">
+            <h2 className="text-lg sm:text-xl font-medium mb-4">Account Information</h2>
+            <div className="space-y-3 text-sm sm:text-base">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-2 border-b border-zinc-700">
                 <span>Member Since</span>
                 <span>{authUser.createdAt?.split("T")[0]}</span>
               </div>
-              <div className="flex items-center justify-between py-2">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-2">
                 <span>Account Status</span>
                 <span className="text-green-500">Active</span>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   );
 };
+
 export default ProfilePage;

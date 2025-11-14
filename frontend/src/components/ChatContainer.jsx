@@ -47,18 +47,14 @@ const ChatContainer = () => {
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-base-100">
         {messages.length === 0 ? (
-          <div className="flex items-center justify-center h-full animate-in fade-in duration-500">
+          <div className="flex items-center justify-center h-full">
             <p className="text-base-content/60">No messages yet. Start the conversation!</p>
           </div>
         ) : (
           messages.map((message, index) => (
             <div
               key={message._id}
-              className={`
-                chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}
-                animate-in slide-in-from-bottom duration-300
-              `}
-              style={{ animationDelay: `${index * 50}ms` }}
+              className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
               ref={index === messages.length - 1 ? messageEndRef : null}
             >
               <div className="chat-image avatar">
@@ -70,43 +66,54 @@ const ChatContainer = () => {
                         : selectedUser.profilePic || "/avatar.png"
                     }
                     alt="profile pic"
-                    className="transition-transform duration-200 hover:scale-110"
+                    className=""
                   />
                 </div>
               </div>
+
               <div className="chat-header mb-1">
                 <time className="text-xs opacity-50 ml-1">
                   {formatMessageTime(message.createdAt)}
                 </time>
               </div>
-              <div className="chat-bubble flex flex-col transition-all duration-200 hover:scale-[1.02]">
+
+              <div className="chat-bubble flex flex-col">
                 {message.images && message.images.length > 0 && (
-                  <div className={`grid gap-2 mb-2 ${
-                    message.images.length === 1 ? "grid-cols-1" :
-                    message.images.length === 2 ? "grid-cols-2" :
-                    message.images.length === 3 ? "grid-cols-3" :
-                    "grid-cols-2"
-                  }`}>
+                  <div
+                    className={`grid gap-2 mb-2 ${
+                      message.images.length === 1 ? "grid-cols-1" :
+                      message.images.length === 2 ? "grid-cols-2" :
+                      message.images.length === 3 ? "grid-cols-3" :
+                      "grid-cols-3"
+                    }`}
+                  >
                     {message.images.map((img, idx) => (
-                      <img
+                      <div
                         key={idx}
-                        src={img}
-                        alt={`Attachment ${idx + 1}`}
-                        className="rounded-md max-w-[200px] transition-transform duration-200 hover:scale-105 cursor-pointer"
-                        onClick={() => window.open(img, '_blank')}
-                      />
+                        className={`relative overflow-hidden rounded-lg  ${
+                          message.images.length === 1 ? "w-full h-[280px]" : "aspect-square"
+                        }`}
+                      >
+                        <img
+                          src={img}
+                          alt={`Attachment ${idx + 1}`}
+                          className="w-full h-full object-cover block cursor-pointer"
+                          onClick={() => window.open(img, "_blank")}
+                        />
+                      </div>
                     ))}
                   </div>
                 )}
-                {/* Legacy support for single image */}
+
                 {message.image && !message.images && (
                   <img
                     src={message.image}
                     alt="Attachment"
-                    className="sm:max-w-[200px] rounded-md mb-2 transition-transform duration-200 hover:scale-105 cursor-pointer"
-                    onClick={() => window.open(message.image, '_blank')}
+                    className="sm:max-w-[200px] rounded-md mb-2 cursor-pointer"
+                    onClick={() => window.open(message.image, "_blank")}
                   />
                 )}
+
                 {message.text && <p className="break-words">{message.text}</p>}
               </div>
             </div>

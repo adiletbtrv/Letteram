@@ -47,14 +47,18 @@ const ChatContainer = () => {
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-base-100">
         {messages.length === 0 ? (
-          <div className="flex items-center justify-center h-full">
+          <div className="flex items-center justify-center h-full animate-in fade-in duration-500">
             <p className="text-base-content/60">No messages yet. Start the conversation!</p>
           </div>
         ) : (
           messages.map((message, index) => (
             <div
               key={message._id}
-              className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
+              className={`
+                chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}
+                animate-in slide-in-from-bottom duration-300
+              `}
+              style={{ animationDelay: `${Math.min(index * 50, 500)}ms` }}
               ref={index === messages.length - 1 ? messageEndRef : null}
             >
               <div className="chat-image avatar">
@@ -66,18 +70,18 @@ const ChatContainer = () => {
                         : selectedUser.profilePic || "/avatar.png"
                     }
                     alt="profile pic"
-                    className=""
+                    className="transition-transform duration-200 hover:scale-110"
                   />
                 </div>
               </div>
-
+              
               <div className="chat-header mb-1">
                 <time className="text-xs opacity-50 ml-1">
                   {formatMessageTime(message.createdAt)}
                 </time>
               </div>
-
-              <div className="chat-bubble flex flex-col">
+              
+              <div className="chat-bubble">
                 {message.images && message.images.length > 0 && (
                   <div
                     className={`grid gap-2 mb-2 ${
@@ -90,14 +94,14 @@ const ChatContainer = () => {
                     {message.images.map((img, idx) => (
                       <div
                         key={idx}
-                        className={`relative overflow-hidden rounded-lg  ${
+                        className={`relative overflow-hidden rounded-lg ${
                           message.images.length === 1 ? "w-full h-[280px]" : "aspect-square"
                         }`}
                       >
                         <img
                           src={img}
                           alt={`Attachment ${idx + 1}`}
-                          className="w-full h-full object-cover block cursor-pointer"
+                          className="w-full h-full object-cover cursor-pointer transition-transform duration-200 hover:scale-105"
                           onClick={() => window.open(img, "_blank")}
                         />
                       </div>
@@ -109,7 +113,7 @@ const ChatContainer = () => {
                   <img
                     src={message.image}
                     alt="Attachment"
-                    className="sm:max-w-[200px] rounded-md mb-2 cursor-pointer"
+                    className="sm:max-w-[200px] rounded-md mb-2 cursor-pointer transition-transform duration-200 hover:scale-105"
                     onClick={() => window.open(message.image, "_blank")}
                   />
                 )}

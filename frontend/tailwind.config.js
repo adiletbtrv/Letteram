@@ -2,54 +2,63 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'xs': '475px', // Extra small devices
+        // sm: '640px' - default
+        // md: '768px' - default
+        // lg: '1024px' - default (ноутбуки)
+        // xl: '1280px' - default (большие ноутбуки)
+        // 2xl: '1536px' - default (десктопы)
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
       {
         letteram_light: {
-          "primary": "#A3B087",        // Приглушенный зеленый (для кнопок и акцентов)
-          "primary-content": "#FFFFFF", // Белый текст на primary
-          "secondary": "#D9CFC7",      // Серо-бежевый
-          "secondary-content": "#313647", // Темный текст на secondary
-          "accent": "#435663",         // Серо-синий
-          "accent-content": "#FFFFFF",  // Белый текст на accent
-          "neutral": "#313647",        // Темно-синий
-          "neutral-content": "#EFE9E3", // Светлый текст на neutral
-          "base-100": "#FFFFFF",       // Белый фон
-          "base-200": "#F9F8F6",       // Очень светлый бежевый
-          "base-300": "#EFE9E3",       // Светло-бежевый
-          "base-content": "#313647",   // Текст темный
-          "info": "#A3B087",           // Приглушенный зеленый
+          "primary": "#A3B087",
+          "primary-content": "#FFFFFF",
+          "secondary": "#D9CFC7",
+          "secondary-content": "#313647",
+          "accent": "#435663",
+          "accent-content": "#FFFFFF",
+          "neutral": "#313647",
+          "neutral-content": "#EFE9E3",
+          "base-100": "#FFFFFF",
+          "base-200": "#F9F8F6",
+          "base-300": "#EFE9E3",
+          "base-content": "#313647",
+          "info": "#A3B087",
           "info-content": "#FFFFFF",
-          "success": "#A3B087",        // Приглушенный зеленый
+          "success": "#A3B087",
           "success-content": "#FFFFFF",
-          "warning": "#D9CFC7",        // Серо-бежевый
+          "warning": "#D9CFC7",
           "warning-content": "#313647",
-          "error": "#C9B59C",          // Светло-коричневый
+          "error": "#C9B59C",
           "error-content": "#313647",
         },
         letteram_dark: {
-          "primary": "#A3B087",        // Приглушенный зеленый (для отправленных сообщений)
-          "primary-content": "#313647", // Темный текст на primary
-          "secondary": "#435663",      // Серо-синий
-          "secondary-content": "#EFE9E3", // Светлый текст на secondary
-          "accent": "#FFF8D4",         // Светло-желтый
-          "accent-content": "#313647",  // Темный текст на accent
-          "neutral": "#313647",        // Темно-синий
-          "neutral-content": "#EFE9E3", // Светлый текст на neutral
-          "base-100": "#313647",       // Темно-синий фон
-          "base-200": "#3d4554",       // Чуть светлее
-          "base-300": "#4a5263",       // Еще светлее
-          "base-content": "#EFE9E3",   // Текст светлый
-          "info": "#A3B087",           // Приглушенный зеленый
+          "primary": "#A3B087",
+          "primary-content": "#313647",
+          "secondary": "#435663",
+          "secondary-content": "#EFE9E3",
+          "accent": "#FFF8D4",
+          "accent-content": "#313647",
+          "neutral": "#313647",
+          "neutral-content": "#EFE9E3",
+          "base-100": "#313647",
+          "base-200": "#3d4554",
+          "base-300": "#4a5263",
+          "base-content": "#EFE9E3",
+          "info": "#A3B087",
           "info-content": "#313647",
-          "success": "#A3B087",        // Приглушенный зеленый
+          "success": "#A3B087",
           "success-content": "#313647",
-          "warning": "#FFF8D4",        // Светло-желтый
+          "warning": "#FFF8D4",
           "warning-content": "#313647",
-          "error": "#435663",          // Серо-синий
+          "error": "#435663",
           "error-content": "#EFE9E3",
         },
       },

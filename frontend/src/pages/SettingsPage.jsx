@@ -3,8 +3,8 @@ import { useThemeStore } from "../store/useThemeStore";
 import { Send } from "lucide-react";
 
 const PREVIEW_MESSAGES = [
-  { id: 1, content: "Hey! How's it going?", isSent: false },
-  { id: 2, content: "I'm doing great! Just working on some new features.", isSent: true },
+  { id: 1, content: "The thing I hate the most is to trample on other people's good will.", isSent: false },
+  { id: 2, content: "If you use your head, you won't get fat even if you eat sweets.", isSent: true },
 ];
 
 const SettingsPage = () => {
@@ -51,16 +51,14 @@ const SettingsPage = () => {
             <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
               <div className="p-4 bg-base-100">
                 <div className="max-w-lg mx-auto">
-                  {/* Mock Chat UI */}
                   <div className="bg-base-100 rounded-xl shadow-sm overflow-hidden border border-base-300">
-                    {/* Chat Header */}
                     <div className="px-4 py-3 border-b border-base-300 bg-base-100">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content font-medium">
-                          J
+                          Y
                         </div>
                         <div>
-                          <h3 className="font-medium text-sm">John Doe</h3>
+                          <h3 className="font-medium text-sm">Yagami Light</h3>
                           <p className="text-xs text-base-content/70">Online</p>
                         </div>
                       </div>
@@ -87,7 +85,7 @@ const SettingsPage = () => {
                                 ${message.isSent ? "text-primary-content/70" : "text-base-content/70"}
                               `}
                             >
-                              12:00 PM
+                              20:31 PM
                             </p>
                           </div>
                         </div>

@@ -105,7 +105,7 @@ const MessageInput = () => {
         images: imagePreviews.map(img => img.data),
       });
 
-      // Анимация отправки
+      // Очищаем форму после успешной отправки
       setText("");
       setImagePreviews([]);
       if (fileInputRef.current) fileInputRef.current.value = "";
@@ -120,17 +120,20 @@ const MessageInput = () => {
   return (
     <div className="p-4 w-full border-t border-base-300 bg-base-100">
       {imagePreviews.length > 0 && (
-        <div className="mb-3 flex flex-wrap gap-2">
+        <div className="mb-3 flex flex-wrap gap-2 animate-in slide-in-from-bottom duration-300">
           {imagePreviews.map((img) => (
-            <div key={img.id} className="relative">
+            <div key={img.id} className="relative group animate-in zoom-in duration-200">
               <img
                 src={img.data}
                 alt="Preview"
-                className="w-20 h-20 object-cover rounded-lg border border-base-300"
+                className="w-20 h-20 object-cover rounded-lg border border-base-300 
+                transition-all duration-200 group-hover:scale-105"
               />
               <button
                 onClick={() => removeImage(img.id)}
-                className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-error flex items-center justify-center transition-all duration-150 hover:scale-105 active:scale-95"
+                className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-error
+                flex items-center justify-center transition-all duration-200
+                hover:scale-110 active:scale-95"
                 type="button"
               >
                 <X className="size-4 text-white" />
@@ -140,10 +143,12 @@ const MessageInput = () => {
           {imagePreviews.length < MAX_IMAGES && (
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="w-20 h-20 rounded-lg border-2 border-dashed border-base-300 flex items-center justify-center"
+              className="w-20 h-20 rounded-lg border-2 border-dashed border-base-300
+              flex items-center justify-center hover:border-primary hover:bg-primary/5
+              transition-all duration-200 group"
               type="button"
             >
-              <Image className="size-6 text-base-content/40" />
+              <Image className="size-6 text-base-content/40 group-hover:text-primary transition-colors" />
             </button>
           )}
         </div>
@@ -153,7 +158,8 @@ const MessageInput = () => {
         <div className="flex-1 flex gap-2">
           <input
             type="text"
-            className="w-full input input-bordered rounded-lg input-sm sm:input-md"
+            className="w-full input input-bordered rounded-lg input-sm sm:input-md
+            transition-all duration-200 focus:ring-2 focus:ring-primary/50"
             placeholder="Type a message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -165,12 +171,16 @@ const MessageInput = () => {
             multiple
             className="hidden"
             ref={fileInputRef}
-            onChange={() => {}}
+            onChange={handleImageChange}
           />
 
           <button
             type="button"
-            className={`hidden sm:flex btn btn-circle btn-sm sm:btn-md ${imagePreviews.length > 0 ? "btn-primary" : "btn-ghost"}`}
+            className={`
+              hidden sm:flex btn btn-circle btn-sm sm:btn-md
+              transition-all duration-200 hover:scale-110 active:scale-95
+              ${imagePreviews.length > 0 ? "btn-primary" : "btn-ghost"}
+            `}
             onClick={() => fileInputRef.current?.click()}
             disabled={imagePreviews.length >= MAX_IMAGES}
           >
@@ -179,7 +189,11 @@ const MessageInput = () => {
         </div>
         <button
           type="submit"
-          className={`btn btn-circle btn-sm sm:btn-md btn-primary ${isSending ? "animate-pulse" : ""}`}
+          className={`
+            btn btn-circle btn-sm sm:btn-md btn-primary
+            transition-all duration-200
+            ${isSending ? "animate-pulse" : "hover:scale-110 active:scale-95"}
+          `}
           disabled={(!text.trim() && imagePreviews.length === 0) || isSending}
         >
           <Send className={`size-5 ${isSending ? "animate-bounce" : ""}`} />
@@ -187,7 +201,7 @@ const MessageInput = () => {
       </form>
 
       {imagePreviews.length > 0 && (
-        <div className="mt-2 text-xs text-base-content/60">
+        <div className="mt-2 text-xs text-base-content/60 animate-in fade-in duration-300">
           {imagePreviews.length} / {MAX_IMAGES} images selected
         </div>
       )}
